@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
-#include <GL\glew.h>
+#include "Common.h"
+
 #include "transform.h"
 #include "Camera.h"
 

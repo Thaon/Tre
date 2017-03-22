@@ -1,11 +1,17 @@
 #include "Display.h"
 
 
-Display::Display()
+Display::Display(int width, int height)
 {
 	sdlWindow = nullptr; //initialise to generate null access violation for debugging. 
-	screenWidth = 1024.0f;
-	screenHeight = 768.0f; 
+	screenWidth = width;
+	screenHeight = height;
+}
+
+Display::Display()
+{
+	sdlWindow = nullptr;
+	screenWidth = screenHeight = 800;
 }
 
 Display::~Display()

@@ -1,6 +1,7 @@
 #pragma once
-#include <SDL\SDL.h>
-#include <GL/glew.h>
+
+#include "Common.h"
+
 #include "Display.h" 
 #include "Shader.h"
 #include "Mesh.h"

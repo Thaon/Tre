@@ -1,0 +1,9 @@
+﻿  MainGame.cpp
+  Display.cpp
+c:\users\thaon\documents\github\tre\tre\display.cpp(24): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\thaon\documents\github\tre\tre\display.cpp(25): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  main.cpp
+  Tre.vcxproj -> C:\Users\Thaon\Documents\GitHub\Tre\Debug\Tre.exe
+  Tre.vcxproj -> C:\Users\Thaon\Documents\GitHub\Tre\Debug\Tre.pdb (Full PDB)

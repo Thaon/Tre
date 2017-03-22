@@ -16,7 +16,7 @@ Transform transform;
 MainGame::MainGame()
 {
 	_gameState = GameState::PLAY;
-	Display* _gameDisplay = new Display(); //new display
+	Display* _gameDisplay = new Display(800, 600); //new display
     Mesh* mesh1();
 	Mesh* mesh2();
 }

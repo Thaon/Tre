@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Object Include="..\res\monkey3.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stb_image.c" />
+    <ClCompile Include="Display.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="obj_loader.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Camera.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Display.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="obj_loader.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="transform.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\res\shader.frag" />
+    <None Include="..\res\shader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{ca07e361-b7c5-4bae-988f-22db054f265b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP">
+      <UniqueIdentifier>{4b95db18-ce59-4674-a702-32737a3a0636}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

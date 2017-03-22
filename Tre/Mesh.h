@@ -1,7 +1,7 @@
 #pragma once
-#include <glm\glm.hpp>
-#include <GL\glew.h>
-#include <string>
+
+#include "Common.h"
+
 #include "obj_loader.h"
 
 struct Vertex
