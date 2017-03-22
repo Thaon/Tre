@@ -8,7 +8,8 @@ in mat4 cam;
 
 varying vec2 texCoord0;
 
-uniform sampler2D diffuse;
+uniform sampler2D texture1;
+uniform sampler2D texture2;
  
 void main() {
  
@@ -18,5 +19,5 @@ void main() {
   float vdn = 1.0 - max(dot(v, n), 0.0);        // the rim contribution
  
   fragcolor.a = 1.0;
-  fragcolor.rgb = texture2D(diffuse, texCoord0) * vec3(smoothstep(0.6, 1.0, vdn));
+  fragcolor.rgb = texture2D(texture1, texCoord0) * vec3(smoothstep(0.6, 1.0, vdn));
 }

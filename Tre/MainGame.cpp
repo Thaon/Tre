@@ -90,11 +90,7 @@ void MainGame::drawGame(float delta)
 		mesh->GetShader()->Bind();
 		mesh->GetShader()->Update(transform, *m_activeCam);
 		
-		//bind textures
-		for (int i = 0; i < mesh->Textures().size(); i++)
-		{
-			mesh->Textures().at(i)->Bind(i);
-		}
+		//textures are bound in the Mesh's draw function
 
 		//draw
 		mesh->draw();

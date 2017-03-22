@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include <vector>
+#include <sstream>
 
 
 void Mesh::init(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices)
@@ -78,11 +79,21 @@ Mesh::~Mesh()
 
 void Mesh::draw()
 {
+	//bind textures and pass them to shader
+	for (GLuint i = 0; i < this->m_textures.size(); i++)
+	{
+		std::string texName = "texture";
+		texName += (int)i + '1'; //int to char conversion
+
+		GLuint loc = glGetUniformLocation(m_shader->GetProgram(), (texName).c_str());
+		glUseProgram(m_shader->GetProgram());
+		glUniform1i(loc, i);
+		glActiveTexture(GL_TEXTURE0 + i); // Activate proper texture unit before binding
+		glBindTexture(GL_TEXTURE_2D, m_textures[i]->GetHandler());
+	}
+
 	glBindVertexArray(vertexArrayObject);
-	
 	glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0);
-	//glDrawArrays(GL_TRIANGLES, 0, drawCount);
-	
 	glBindVertexArray(0);
 }
 

@@ -6,8 +6,7 @@ class Texture
 public:
 	Texture(const std::string& fileName);
 
-	void Bind(unsigned int unit); // bind upto 32 textures
-
+	GLuint GetHandler() { return textureHandler; }
 	~Texture();
 
 protected:

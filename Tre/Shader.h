@@ -8,6 +8,7 @@ class Shader
 {
 public:
 	Shader(const std::string& filename);
+    ~Shader();
 
 	void Bind(); //Set gpu to use our shaders
 	void Update(const Transform& transform, const Camera& camera);
@@ -16,8 +17,7 @@ public:
 	void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 	GLuint Shader::CreateShader(const std::string& text, unsigned int type);
 
-    ~Shader();
-
+	GLuint GetProgram() { return program; }
 
 protected:
 private:

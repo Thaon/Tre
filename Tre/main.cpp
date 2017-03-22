@@ -21,6 +21,7 @@ int main(int argc, char** argv) //argument used to call SDL main
 	monkey.loadModel("../res/monkey3.obj");
 	monkey.SetShader(&shader);
 	monkey.AddTexture(&texture1);
+	monkey.AddTexture(&texture);
 
 	
 	//create camera

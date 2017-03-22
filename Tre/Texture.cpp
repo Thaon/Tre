@@ -22,6 +22,8 @@ Texture::Texture(const std::string& fileName)
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // linear filtering for minification (texture is smaller than area)
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // linear filtering for magnifcation (texture is larger)
 
+	glGenerateMipmap(GL_TEXTURE_2D);
+
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData); //Target, Mipmapping Level, Pixel Format, Width, Height, Border Size, Input Format, Data Type of Texture, Image Data
 
 	stbi_image_free(imageData);
@@ -30,12 +32,4 @@ Texture::Texture(const std::string& fileName)
 Texture::~Texture()
 {
 	glDeleteTextures(1, &textureHandler); // number of and address of textures
-}
-
-void Texture::Bind(unsigned int unit)
-{
-	assert(unit >= 0 && unit <= 31); /// check we are working with one of the 32 textures
-
-	glActiveTexture(GL_TEXTURE0 + unit); //set acitve texture unit
-	glBindTexture(GL_TEXTURE_2D, textureHandler); //type of and texture to bind to unit
 }
