@@ -57,6 +57,7 @@ Mesh::Mesh(std::string name)
 	m_name = name;
 	m_shader = nullptr;
 	m_textures = std::vector<Texture*>();
+	m_transform = Transform();
 }
 
 Mesh::Mesh()
@@ -64,6 +65,7 @@ Mesh::Mesh()
 	drawCount = NULL;
 	m_shader = nullptr;
 	m_textures = std::vector<Texture*>();
+	m_transform = Transform();
 }
 
 void Mesh::loadModel(const std::string& filename)

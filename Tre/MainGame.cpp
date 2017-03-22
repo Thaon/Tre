@@ -32,6 +32,7 @@ void MainGame::InitDisplay(int width, int height)
 void MainGame::run()
 {
 	initSystems();
+	m_controller.Start();
 	gameLoop();
 }
 
@@ -42,7 +43,6 @@ void MainGame::SetActiveCamera(Camera* camera)
 
 void MainGame::initSystems()
 {
-	counter = 0.0f;
 }
 
 void MainGame::gameLoop()
@@ -55,6 +55,7 @@ void MainGame::gameLoop()
 		//std::cout << "old: " << oldTime << std::endl << "new: " << newTime << std::endl << "delta: " << deltaTime << std::endl;
 
 		processInput();
+		m_controller.Update(deltaTime);
 		drawGame(deltaTime);
 	}
 }
@@ -80,23 +81,17 @@ void MainGame::drawGame(float delta)
 {
 	m_gameDisplay->clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
 
-	//transform.SetPos(glm::vec3(sinf(counter), 0.0, 0.0));
-	transform.SetRot(glm::vec3(0.0, counter * 2, 0.0));
-	//transform.SetScale(glm::vec3(sinf(counter), sinf(counter), sinf(counter)));
-
 	for (auto mesh : SceneManager::GetActiveScene()->GetMeshes())
 	{
 		//bind shader
 		mesh->GetShader()->Bind();
-		mesh->GetShader()->Update(transform, *m_activeCam);
+		mesh->GetShader()->Update(mesh->GetTransform(), *m_activeCam);
 		
 		//textures are bound in the Mesh's draw function
 
 		//draw
 		mesh->draw();
 	}
-
-	counter += 1 * delta;
 				
 	glEnableClientState(GL_COLOR_ARRAY); 
 	glEnd();

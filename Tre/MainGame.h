@@ -3,11 +3,8 @@
 #include "Common.h"
 
 #include "Display.h" 
-#include "Shader.h"
-#include "Mesh.h"
-#include "Texture.h"
-#include "transform.h"
-#include "SceneManager.h"
+
+#include "GameController.h"
 
 enum class GameState{PLAY, EXIT};
 
@@ -32,7 +29,8 @@ private:
 	Camera* m_activeCam;
 	GameState m_gameState;
 
-	float counter;
+	GameController m_controller;
+
 	float oldTime, newTime = 0;
 
 };
