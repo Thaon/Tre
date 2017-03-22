@@ -11,38 +11,43 @@ Vertex vertices[] = { Vertex(glm::vec3(-0.5, -0.5, 0), glm::vec2(0.0, 0.0)),
 
 unsigned int indices[] = { 0, 1, 2 };
 
-Transform transform;
-
 MainGame::MainGame()
 {
-	_gameState = GameState::PLAY;
-	Display* _gameDisplay = new Display(800, 600); //new display
-    Mesh* mesh1();
-	Mesh* mesh2();
+	m_activeCam = nullptr;
+	m_gameState = GameState::PLAY;
+	m_gameDisplay = nullptr;
 }
 
 MainGame::~MainGame()
 {
+	delete m_gameDisplay;
+}
+
+void MainGame::InitDisplay(int width, int height)
+{
+	m_gameDisplay = new Display(width, height);
+	m_gameDisplay->initDisplay();
 }
 
 void MainGame::run()
 {
-	initSystems(); 
+	initSystems();
 	gameLoop();
+}
+
+void MainGame::SetActiveCamera(Camera* camera)
+{
+	m_activeCam = camera;
 }
 
 void MainGame::initSystems()
 {
-	_gameDisplay.initDisplay(); 
-	//mesh1.init(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0])); //size calcuated by number of bytes of an array / no bytes of one element
-	mesh2.loadModel("../res/monkey3.obj");
-	myCamera.initCamera(glm::vec3(0, 0, -5), 70.0f, (float)_gameDisplay.getWidth()/_gameDisplay.getHeight(), 0.01f, 1000.0f);
 	counter = 0.0f;
 }
 
 void MainGame::gameLoop()
 {
-	while (_gameState != GameState::EXIT)
+	while (m_gameState != GameState::EXIT)
 	{
 		processInput();
 		drawGame();
@@ -58,35 +63,42 @@ void MainGame::processInput()
 		switch (evnt.type)
 		{
 			case SDL_QUIT:
-				_gameState = GameState::EXIT;
+				m_gameState = GameState::EXIT;
 				break;
 		}
 	}
 	
 }
 
-
+Transform transform;
 void MainGame::drawGame()
 {
-	_gameDisplay.clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
-	
-	Shader shader("../res/shader"); //new shader
-	Texture texture("../res/bricks.jpg"); //load texture
-	Texture texture1("../res/water.jpg"); //load texture
-	
+	m_gameDisplay->clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
+
 	transform.SetPos(glm::vec3(sinf(counter), 0.0, 0.0));
 	transform.SetRot(glm::vec3(0.0, 0.0, counter * 5));
 	transform.SetScale(glm::vec3(sinf(counter), sinf(counter), sinf(counter)));
 
-	shader.Bind();
-	shader.Update(transform, myCamera);
-	texture.Bind(0);
-	//mesh1.draw();
-	mesh2.draw();
+	for (auto mesh : SceneManager::GetActiveScene()->GetMeshes())
+	{
+		//bind shader
+		mesh->GetShader()->Bind();
+		mesh->GetShader()->Update(transform, *m_activeCam);
+		
+		//bind textures
+		for (int i = 0; i < mesh->Textures().size(); i++)
+		{
+			mesh->Textures().at(i)->Bind(i);
+		}
+
+		//draw
+		mesh->draw();
+	}
+
 	counter = counter + 0.01f;
 				
 	glEnableClientState(GL_COLOR_ARRAY); 
 	glEnd();
 
-	_gameDisplay.swapBuffer();
+	m_gameDisplay->swapBuffer();
 } 

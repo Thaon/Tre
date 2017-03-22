@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Object Include="..\res\monkey3.obj" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="stb_image.c" />
     <ClCompile Include="Display.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
@@ -32,9 +28,11 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>CPP</Filter>
     </ClCompile>
+    <ClCompile Include="stb_image.c">
+      <Filter>External</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stb_image.h" />
     <ClInclude Include="Camera.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -68,10 +66,17 @@
     <ClInclude Include="Common.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>External</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\res\shader.frag" />
-    <None Include="..\res\shader.vert" />
+    <None Include="..\res\shader.frag">
+      <Filter>External</Filter>
+    </None>
+    <None Include="..\res\shader.vert">
+      <Filter>External</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -80,5 +85,13 @@
     <Filter Include="CPP">
       <UniqueIdentifier>{4b95db18-ce59-4674-a702-32737a3a0636}</UniqueIdentifier>
     </Filter>
+    <Filter Include="External">
+      <UniqueIdentifier>{d09abc4d-4270-4189-bde3-3d3b1b49de73}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\res\monkey3.obj">
+      <Filter>External</Filter>
+    </Object>
   </ItemGroup>
 </Project>

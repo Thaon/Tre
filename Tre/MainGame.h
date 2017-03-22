@@ -7,6 +7,7 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include "transform.h"
+#include "SceneManager.h"
 
 enum class GameState{PLAY, EXIT};
 
@@ -16,7 +17,9 @@ public:
 	MainGame();
 	~MainGame();
 
+	void InitDisplay(int width, int height);
 	void run();
+	void SetActiveCamera(Camera* camera);
 
 private:
 
@@ -25,11 +28,9 @@ private:
 	void gameLoop();
 	void drawGame();
 
-	Display _gameDisplay;
-	GameState _gameState;
-	Mesh mesh1;
-	Mesh mesh2;
-	Camera myCamera;
+	Display* m_gameDisplay;
+	Camera* m_activeCam;
+	GameState m_gameState;
 
 	float counter;
 

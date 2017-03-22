@@ -1,8 +1,24 @@
 #pragma once
+
+#include "Common.h"
+#include "Scene.h"
+
 class SceneManager
 {
 public:
-	SceneManager();
-	~SceneManager();
+	static void CreateScene(std::string sceneName);
+
+	static Scene* GetScene(std::string sceneName);
+	static Scene* GetScene(int sceneIndex);
+
+	static void SetActiveScene(std::string sceneName);
+	static void SetActiveScene(int sceneIndex);
+
+	static Scene* GetActiveScene();
+
+
+private:
+	static std::vector<Scene*> m_scenes;
+	static Scene* m_activeScene;
 };
 

@@ -10,31 +10,13 @@ void Mesh::init(Vertex* vertices, unsigned int numVertices, unsigned int* indice
 	{
 		model.positions.push_back(*vertices[i].GetPos());
 		model.texCoords.push_back(*vertices[i].GetTexCoord());
-		//model.normals.push_back(*vertices[i].GetNormal());
+		model.normals.push_back(*vertices[i].GetNormal());
 	}
 
 	for (unsigned int i = 0; i < numIndices; i++)
 		model.indices.push_back(indices[i]);
 
 	initModel(model);
-
-	//glGenBuffers(NUM_BUFFERS, vertexArrayBuffers); //generate our buffers based of our array of data/buffers - GLuint vertexArrayBuffers[NUM_BUFFERS];
-	//glBindBuffer(GL_ARRAY_BUFFER, vertexArrayBuffers[POSITION_VERTEXBUFFER]); //tell opengl what type of data the buffer is (GL_ARRAY_BUFFER), and pass the data
-	//glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(positions[0]), &positions[0], GL_STATIC_DRAW); //move the data to the GPU - type of data, size of data, starting address (pointer) of data, where do we store the data on the GPU (determined by type)
-
-	//glEnableVertexAttribArray(0);
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	//glBindBuffer(GL_ARRAY_BUFFER, vertexArrayBuffers[TEXCOORD_VB]); //tell opengl what type of data the buffer is (GL_ARRAY_BUFFER), and pass the data
-	//glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(textCoords[0]), &textCoords[0], GL_STATIC_DRAW); //move the data to the GPU - type of data, size of data, starting address (pointer) of data, where do we store the data on the GPU
-	//
-	//glEnableVertexAttribArray(1);
-	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertexArrayBuffers[INDEX_VB]); //tell opengl what type of data the buffer is (GL_ARRAY_BUFFER), and pass the data
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, numIndices * sizeof(indices[0]), &indices[0], GL_STATIC_DRAW); //move the data to the GPU - type of data, size of data, starting address (pointer) of data, where do we store the data on the GPU
-
-	//glBindVertexArray(0); // unbind our VAO
 }
 
 void Mesh::initModel(const IndexedModel& model)
@@ -68,9 +50,19 @@ void Mesh::initModel(const IndexedModel& model)
 	glBindVertexArray(0); // unbind our VAO
 }
 
+Mesh::Mesh(std::string name)
+{
+	drawCount = NULL;
+	m_name = name;
+	m_shader = nullptr;
+	m_textures = std::vector<Texture*>();
+}
+
 Mesh::Mesh()
 {
 	drawCount = NULL;
+	m_shader = nullptr;
+	m_textures = std::vector<Texture*>();
 }
 
 void Mesh::loadModel(const std::string& filename)

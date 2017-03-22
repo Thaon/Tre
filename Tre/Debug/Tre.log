@@ -1,9 +1,4 @@
-﻿  MainGame.cpp
-  Display.cpp
-c:\users\thaon\documents\github\tre\tre\display.cpp(24): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-c:\users\thaon\documents\github\tre\tre\display.cpp(25): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  main.cpp
-  Tre.vcxproj -> C:\Users\Thaon\Documents\GitHub\Tre\Debug\Tre.exe
-  Tre.vcxproj -> C:\Users\Thaon\Documents\GitHub\Tre\Debug\Tre.pdb (Full PDB)
+﻿  SceneManager.cpp
+c:\users\gabri\onedrive\documents\github\tre\tre\scenemanager.cpp(25): warning C4018: '>': signed/unsigned mismatch
+c:\users\gabri\onedrive\documents\github\tre\tre\scenemanager.cpp(41): warning C4018: '>': signed/unsigned mismatch
+  Tre.vcxproj -> C:\Users\gabri\OneDrive\Documents\GitHub\Tre\Debug\Tre.exe
