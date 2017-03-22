@@ -1,28 +1,44 @@
 #include <iostream>
 #include "MainGame.h"
 
+
 int main(int argc, char** argv) //argument used to call SDL main
 {
 	//create and configure game
 	MainGame mainGame;
-	int width = 800;
+	int width = 1600;
 	int height = 600;
 	mainGame.InitDisplay(width, height);
 
 	
 	//create monkey object
 	Mesh monkey = Mesh("monkey");
+	Mesh monkey2 = Mesh("monkey2");
+	Mesh monkey3 = Mesh("monkey3");
+
 
 	//Shader shader("../res/shader"); //unlit shader
-	Shader shader("../res/blend"); //rim shader
+	Shader unlitshader("../res/shader"); //rim shader
+	Shader rimshader("../res/rim"); //rim shader
+	Shader blendshader("../res/blend"); //rim shader
+	
 	Texture texture("../res/bricks.jpg"); //load texture
 	Texture texture1("../res/water.jpg"); //load texture
 
 	monkey.loadModel("../res/monkey3.obj");
-	monkey.SetShader(&shader);
+	monkey.SetShader(&unlitshader);
 	monkey.AddTexture(&texture1);
 	monkey.AddTexture(&texture);
 
+	monkey2.loadModel("../res/monkey3.obj");
+	monkey2.SetShader(&rimshader);
+	monkey2.AddTexture(&texture1);
+	monkey2.AddTexture(&texture);
+
+	monkey3.loadModel("../res/monkey3.obj");
+	monkey3.SetShader(&blendshader);
+	monkey3.AddTexture(&texture1);
+	monkey3.AddTexture(&texture);
 	
 	//create camera
 	Camera cam;
@@ -33,6 +49,9 @@ int main(int argc, char** argv) //argument used to call SDL main
 	//create scene and add meshes
 	SceneManager::CreateScene("Scene1");
 	SceneManager::GetActiveScene()->AddMesh(&monkey);
+	SceneManager::GetActiveScene()->AddMesh(&monkey2);
+	SceneManager::GetActiveScene()->AddMesh(&monkey3);
+
 	
 	//finally run game
 	mainGame.run();

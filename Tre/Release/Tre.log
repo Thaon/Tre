@@ -1,0 +1,10 @@
+﻿  GameController.cpp
+  MainGame.cpp
+MainGame.cpp(53): warning C4244: '=': conversion from 'Uint64' to 'float', possible loss of data
+  main.cpp
+  Generating code
+  13 of 1499 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
+    26 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Tre.vcxproj -> C:\Users\gabri\OneDrive\Documents\GitHub\Tre\Release\Tre.exe

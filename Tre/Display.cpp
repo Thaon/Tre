@@ -75,6 +75,8 @@ void Display::initDisplay()
 	}
 
 	glEnable(GL_DEPTH_TEST); //enable z-buffering 
+	glDepthFunc(GL_LEQUAL); //nope
+	glEnable(GL_NORMALIZE); //nope, normals still flipped
 	glEnable(GL_CULL_FACE); //dont draw faces that are not pointing at the camera
 
 	glClearColor(0.0f, 1.0f, 1.0f, 1.0f);

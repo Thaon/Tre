@@ -21,6 +21,6 @@ public:
 
 private:
 	float counter;
-	Mesh* monkey;
+	Mesh* m1, *m2, *m3;
 };
 

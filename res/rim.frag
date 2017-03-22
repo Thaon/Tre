@@ -13,6 +13,8 @@ uniform sampler2D texture2;
  
 void main() {
  
+  //mat4 Normal = mat3(transpose(inverse(model))) * normal;
+
   vec3 n = normalize(mat3(cam) * v_norm);      // convert normal to view space, u_vm (view matrix), is a rigid body transform.
   vec3 p = vec3(cam * v_pos);                   // position in view space
   vec3 v = normalize(-p);                       // eye vector
