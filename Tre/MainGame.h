@@ -26,14 +26,14 @@ private:
 	void initSystems();
 	void processInput();
 	void gameLoop();
-	void drawGame();
+	void drawGame(float delta);
 
 	Display* m_gameDisplay;
 	Camera* m_activeCam;
 	GameState m_gameState;
 
 	float counter;
-
+	float oldTime, newTime = 0;
 
 };
 

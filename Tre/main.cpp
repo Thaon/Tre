@@ -13,7 +13,8 @@ int main(int argc, char** argv) //argument used to call SDL main
 	//create monkey object
 	Mesh monkey;
 
-	Shader shader("../res/shader"); //new shader
+	//Shader shader("../res/shader"); //unlit shader
+	Shader shader("../res/rim"); //rim shader
 	Texture texture("../res/bricks.jpg"); //load texture
 	Texture texture1("../res/water.jpg"); //load texture
 

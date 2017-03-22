@@ -26,6 +26,7 @@ private:
 	enum
 	{
 		TRANSFORM_U,
+		CAMPOSITION,
 
 		NUM_UNIFORMS
 	};

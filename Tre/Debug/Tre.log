@@ -1,4 +1,1 @@
-﻿  SceneManager.cpp
-c:\users\gabri\onedrive\documents\github\tre\tre\scenemanager.cpp(25): warning C4018: '>': signed/unsigned mismatch
-c:\users\gabri\onedrive\documents\github\tre\tre\scenemanager.cpp(41): warning C4018: '>': signed/unsigned mismatch
-  Tre.vcxproj -> C:\Users\gabri\OneDrive\Documents\GitHub\Tre\Debug\Tre.exe
+﻿  Tre.vcxproj -> C:\Users\gabri\OneDrive\Documents\GitHub\Tre\Debug\Tre.exe

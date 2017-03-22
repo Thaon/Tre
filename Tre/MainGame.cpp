@@ -49,8 +49,13 @@ void MainGame::gameLoop()
 {
 	while (m_gameState != GameState::EXIT)
 	{
+		oldTime = newTime;
+		newTime = SDL_GetPerformanceCounter();
+		float deltaTime = (newTime - oldTime) / SDL_GetPerformanceFrequency();
+		//std::cout << "old: " << oldTime << std::endl << "new: " << newTime << std::endl << "delta: " << deltaTime << std::endl;
+
 		processInput();
-		drawGame();
+		drawGame(deltaTime);
 	}
 }
 
@@ -71,13 +76,13 @@ void MainGame::processInput()
 }
 
 Transform transform;
-void MainGame::drawGame()
+void MainGame::drawGame(float delta)
 {
 	m_gameDisplay->clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
 
-	transform.SetPos(glm::vec3(sinf(counter), 0.0, 0.0));
-	transform.SetRot(glm::vec3(0.0, 0.0, counter * 5));
-	transform.SetScale(glm::vec3(sinf(counter), sinf(counter), sinf(counter)));
+	//transform.SetPos(glm::vec3(sinf(counter), 0.0, 0.0));
+	transform.SetRot(glm::vec3(0.0, counter * 2, 0.0));
+	//transform.SetScale(glm::vec3(sinf(counter), sinf(counter), sinf(counter)));
 
 	for (auto mesh : SceneManager::GetActiveScene()->GetMeshes())
 	{
@@ -95,7 +100,7 @@ void MainGame::drawGame()
 		mesh->draw();
 	}
 
-	counter = counter + 0.01f;
+	counter += 1 * delta;
 				
 	glEnableClientState(GL_COLOR_ARRAY); 
 	glEnd();
