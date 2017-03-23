@@ -1,2 +1,10 @@
-﻿  main.cpp
+﻿  Model.cpp
+  Mesh.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  main.cpp
+  SceneManager.cpp
+  Scene.cpp
+  MainGame.cpp
+  GameController.cpp
   Tre.vcxproj -> C:\Users\gabri\OneDrive\Documents\GitHub\Tre\Debug\Tre.exe

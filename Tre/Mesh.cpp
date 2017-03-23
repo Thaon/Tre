@@ -19,16 +19,13 @@ void Mesh::SetupMesh()
 
 	// Vertex Positions
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-		(GLvoid*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0);
 	// Vertex Normals
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-		(GLvoid*)offsetof(Vertex, normal));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),	(GLvoid*)offsetof(Vertex, normal));
 	// Vertex Texture Coords
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-		(GLvoid*)offsetof(Vertex, texCoord));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),	(GLvoid*)offsetof(Vertex, texCoord));
 
 	glBindVertexArray(0);
 }
@@ -58,21 +55,29 @@ Mesh::~Mesh()
 
 void Mesh::draw()
 {
-	//bind textures and pass them to shader
+	GLuint diffuseNr = 1;
+	GLuint specularNr = 1;
 	for (GLuint i = 0; i < this->m_textures.size(); i++)
 	{
-		std::string texName = "texture";
-		texName += (int)i + '1'; //int to char conversion
-
-		GLuint loc = glGetUniformLocation(m_shader->GetProgram(), (texName).c_str());
-		glUseProgram(m_shader->GetProgram());
-		glUniform1i(loc, i);
 		glActiveTexture(GL_TEXTURE0 + i); // Activate proper texture unit before binding
-		glBindTexture(GL_TEXTURE_2D, m_textures[i].GetHandler());
-	}
+										  // Retrieve texture number (the N in diffuse_textureN)
+		std::stringstream ss;
+		std::string number;
+		std::string name = m_textures[i].type;
+		if (name == "texture_diffuse")
+			ss << diffuseNr++; // Transfer GLuint to stream
+		else if (name == "texture_specular")
+			ss << specularNr++; // Transfer GLuint to stream
+		number = ss.str();
 
-	glBindVertexArray(vertexArrayObject);
-	glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0);
+		glUniform1i(glGetUniformLocation(m_shader->GetProgram(), (name + number).c_str()), i);
+		glBindTexture(GL_TEXTURE_2D, this->m_textures[i].GetHandler());
+	}
+	glActiveTexture(GL_TEXTURE0);
+
+	// Draw mesh
+	glBindVertexArray(this->vertexArrayObject);
+	glDrawElements(GL_TRIANGLES, this->m_indices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
 

@@ -4,11 +4,12 @@
 class Texture
 {
 public:
-	Texture(const std::string& fileName);
+	Texture();
 	~Texture();
 
 	GLuint GetHandler() { return textureHandler; }
-	std::string path;
+	void SetHandler(GLuint handler) { textureHandler = handler; }
+	std::string path, type;
 
 protected:
 private:

@@ -5,7 +5,6 @@
 #include "Texture.h"
 #include "transform.h"
 
-#include "obj_loader.h"
 
 struct Vertex
 {

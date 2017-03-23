@@ -1,0 +1,72 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 17.02.2013 19:50:26
+
+newmtl 02___Defaultsdfsdffdsfsd
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Tommy\Documents\Ripped game models\Jaws\Bruce\Great_white_Mouth_1.dds
+	map_Kd C:\Users\Tommy\Documents\Ripped game models\Jaws\Bruce\Great_white_Mouth_1.dds
+
+newmtl 02___Defaultfdsfds
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Tommy\Documents\Ripped game models\Jaws\Bruce\Great_White_Mouth_3.dds
+	map_Kd C:\Users\Tommy\Documents\Ripped game models\Jaws\Bruce\Great_White_Mouth_3.dds
+
+newmtl 02___Defaultfdsfsd
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Tommy\Documents\Ripped game models\Jaws\Bruce\Great_White_Mouth_2.dds
+	map_Kd C:\Users\Tommy\Documents\Ripped game models\Jaws\Bruce\Great_White_Mouth_2.dds
+
+newmtl 02___Defaultsdfsdf
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Tommy\Documents\Ripped game models\Jaws\Bruce\Gereat_White_Eyes.dds
+	map_Kd C:\Users\Tommy\Documents\Ripped game models\Jaws\Bruce\Gereat_White_Eyes.dds
+
+newmtl 02___Default
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Tommy\Documents\Ripped game models\Jaws\Bruce\Great_White.dds
+	map_Kd C:\Users\Tommy\Documents\Ripped game models\Jaws\Bruce\Great_White.dds

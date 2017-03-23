@@ -22,8 +22,8 @@ int main(int argc, char** argv) //argument used to call SDL main
 	Shader rimshader("../res/rim"); //rim shader
 	Shader blendshader("../res/blend"); //rim shader
 	
-	Texture texture("../res/bricks.jpg"); //load texture
-	Texture texture1("../res/water.jpg"); //load texture
+	//Texture texture("../res/bricks.jpg"); //load texture
+	//Texture texture1("../res/water.jpg"); //load texture
 
 	dragon.SetShader(&unlitshader);
 
