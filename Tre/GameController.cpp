@@ -27,7 +27,7 @@ void GameController::Update(float deltaTime)
 {
 	counter += 1 * deltaTime;
 
-	//m1->GetTransform().SetScale(glm::vec3(1, 1, 1));
+	m1->GetTransform().SetScale(glm::vec3(sinf(counter * deltaTime), sinf(counter * deltaTime), sinf(counter * deltaTime)));
 	m1->GetTransform().SetRot(glm::vec3(0.0, counter, 0.0));
 	/*m2->GetTransform().SetRot(glm::vec3(0.0, counter, 0.0));
 	m3->GetTransform().SetRot(glm::vec3(0.0, counter, 0.0));*/

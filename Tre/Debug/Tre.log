@@ -1,16 +1,2 @@
-﻿  Display.cpp
-c:\users\gabri\onedrive\documents\github\tre\tre\display.cpp(24): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-c:\users\gabri\onedrive\documents\github\tre\tre\display.cpp(25): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  obj_loader.cpp
-  main.cpp
-  Texture.cpp
-  Shader.cpp
-  SceneManager.cpp
-  Scene.cpp
-  Model.cpp
-  Mesh.cpp
-  MainGame.cpp
-  GameController.cpp
+﻿  main.cpp
   Tre.vcxproj -> C:\Users\gabri\OneDrive\Documents\GitHub\Tre\Debug\Tre.exe

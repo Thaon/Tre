@@ -28,6 +28,8 @@ void Model::loadModel(std::string path)
 		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
 		return;
 	}
+	std::cout << "loaded model at: " << path << std::endl;
+
 	this->directory = path.substr(0, path.find_last_of('/'));
 
 	this->processNode(scene->mRootNode, scene);

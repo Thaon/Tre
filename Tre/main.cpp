@@ -12,7 +12,7 @@ int main(int argc, char** argv) //argument used to call SDL main
 
 	
 	//create monkey object
-	Model dragon = Model("monkey", "../res/Dragon/Dragon.obj");
+	Model dragon = Model("monkey", "../res/nanosuit/nanosuit2.3ds");
 	//Mesh monkey2 = Mesh("monkey2");
 	//Mesh monkey3 = Mesh("monkey3");
 
