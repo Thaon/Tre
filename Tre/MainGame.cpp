@@ -4,13 +4,6 @@
 #include <string>
 
 
-
-Vertex vertices[] = { Vertex(glm::vec3(-0.5, -0.5, 0), glm::vec2(0.0, 0.0)),
-					Vertex(glm::vec3(0, 0.5, 0), glm::vec2(0.5, 1.0)),
-					Vertex(glm::vec3(0.5, -0.5, 0), glm::vec2(1.0, 0.0)) };
-
-unsigned int indices[] = { 0, 1, 2 };
-
 MainGame::MainGame()
 {
 	m_activeCam = nullptr;
@@ -81,16 +74,16 @@ void MainGame::drawGame(float delta)
 {
 	m_gameDisplay->clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
 
-	for (auto mesh : SceneManager::GetActiveScene()->GetMeshes())
+	for (auto model : SceneManager::GetActiveScene()->GetModels())
 	{
 		//bind shader
-		mesh->GetShader()->Bind();
-		mesh->GetShader()->Update(mesh->GetTransform(), *m_activeCam);
+		model->GetShader()->Bind();
+		model->GetShader()->Update(model->GetTransform(), *m_activeCam);
 		
 		//textures are bound in the Mesh's draw function
 
 		//draw
-		mesh->draw();
+		model->Draw();
 	}
 				
 	glEnableClientState(GL_COLOR_ARRAY); 

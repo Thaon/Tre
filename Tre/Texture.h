@@ -5,9 +5,10 @@ class Texture
 {
 public:
 	Texture(const std::string& fileName);
+	~Texture();
 
 	GLuint GetHandler() { return textureHandler; }
-	~Texture();
+	std::string path;
 
 protected:
 private:

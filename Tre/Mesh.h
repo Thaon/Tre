@@ -10,18 +10,10 @@
 struct Vertex
 {
 public:
-	Vertex(const glm::vec3& pos, const glm::vec2& texCoord)
-	{
-		this->pos = pos;
-		this->texCoord = texCoord;
-		this->normal = normal;
-	}
-
 	glm::vec3* GetPos() { return &pos; }
 	glm::vec2* GetTexCoord() { return &texCoord; }
 	glm::vec3* GetNormal() { return &normal; }
 
-private:
 	glm::vec3 pos;
 	glm::vec2 texCoord;
 	glm::vec3 normal;
@@ -30,22 +22,19 @@ private:
 class Mesh
 {
 public:
-	Mesh(std::string name);
+	Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures);
 	Mesh();
 	~Mesh();
 
 	void draw();
-	void init(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
-	void loadModel(const std::string& filename);
-	void initModel(const IndexedModel& model);
+	void SetupMesh();
 
-	Transform& GetTransform() { return m_transform; }
 	std::string GetName() { return m_name; }
 
 	void SetShader(Shader* shader) { m_shader = shader; }
 	Shader* GetShader() { return m_shader; }
-	std::vector<Texture*> Textures() { return m_textures; }
-	void AddTexture(Texture* tex) { m_textures.push_back(tex); }
+	std::vector<Texture> Textures() { return m_textures; }
+	void AddTexture(Texture tex) { m_textures.push_back(tex); }
 
 private:
 	enum
@@ -57,13 +46,15 @@ private:
 		NUM_BUFFERS
 	};
 
-	Transform m_transform;
 	
-	GLuint vertexArrayObject;
+	
+	GLuint vertexArrayObject, vertexBufferObject, elementBufferObject;
 	GLuint vertexArrayBuffers[NUM_BUFFERS]; // create our array of buffers
 	unsigned int drawCount; //how much of the vertexArrayObject do we want to draw
-	std::string m_name;
+	std::string m_name, m_path;
 	Shader* m_shader;
-	std::vector<Texture*> m_textures;
+	std::vector<Vertex> m_vertices;
+	std::vector<GLuint> m_indices;
+	std::vector<Texture> m_textures;
 };
 

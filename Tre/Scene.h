@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common.h"
-#include "Mesh.h"
+#include "Model.h"
 
 class Scene
 {
@@ -10,14 +10,14 @@ public:
 	Scene();
 	~Scene();
 
-	void AddMesh(Mesh* mesh);
-	Mesh* GetMesh(int index);
-	Mesh* GetMesh(std::string m_name);
+	void AddModel(Model* mesh);
+	Model* GetModel(int index);
+	Model* GetModel(std::string m_name);
 	std::string GetName() { return m_name; }
-	std::vector<Mesh*> GetMeshes() { return m_meshes; }
+	std::vector<Model*> GetModels() { return m_models; }
 
 private:
-	std::vector<Mesh*> m_meshes;
+	std::vector<Model*> m_models;
 	std::string m_name;
 };
 

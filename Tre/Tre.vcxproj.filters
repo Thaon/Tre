@@ -31,7 +31,12 @@
     <ClCompile Include="stb_image.c">
       <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="GameController.cpp" />
+    <ClCompile Include="GameController.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -70,7 +75,12 @@
     <ClInclude Include="stb_image.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="GameController.h" />
+    <ClInclude Include="GameController.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

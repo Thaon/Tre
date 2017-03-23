@@ -12,9 +12,9 @@ int main(int argc, char** argv) //argument used to call SDL main
 
 	
 	//create monkey object
-	Mesh monkey = Mesh("monkey");
-	Mesh monkey2 = Mesh("monkey2");
-	Mesh monkey3 = Mesh("monkey3");
+	Model dragon = Model("monkey", "../res/Dragon/Dragon.obj");
+	//Mesh monkey2 = Mesh("monkey2");
+	//Mesh monkey3 = Mesh("monkey3");
 
 
 	//Shader shader("../res/shader"); //unlit shader
@@ -25,12 +25,9 @@ int main(int argc, char** argv) //argument used to call SDL main
 	Texture texture("../res/bricks.jpg"); //load texture
 	Texture texture1("../res/water.jpg"); //load texture
 
-	monkey.loadModel("../res/monkey3.obj");
-	monkey.SetShader(&unlitshader);
-	monkey.AddTexture(&texture1);
-	monkey.AddTexture(&texture);
+	dragon.SetShader(&unlitshader);
 
-	monkey2.loadModel("../res/monkey3.obj");
+	/*monkey2.loadModel("../res/monkey3.obj");
 	monkey2.SetShader(&rimshader);
 	monkey2.AddTexture(&texture1);
 	monkey2.AddTexture(&texture);
@@ -38,7 +35,7 @@ int main(int argc, char** argv) //argument used to call SDL main
 	monkey3.loadModel("../res/monkey3.obj");
 	monkey3.SetShader(&blendshader);
 	monkey3.AddTexture(&texture1);
-	monkey3.AddTexture(&texture);
+	monkey3.AddTexture(&texture);*/
 	
 	//create camera
 	Camera cam;
@@ -48,9 +45,9 @@ int main(int argc, char** argv) //argument used to call SDL main
 
 	//create scene and add meshes
 	SceneManager::CreateScene("Scene1");
-	SceneManager::GetActiveScene()->AddMesh(&monkey);
-	SceneManager::GetActiveScene()->AddMesh(&monkey2);
-	SceneManager::GetActiveScene()->AddMesh(&monkey3);
+	SceneManager::GetActiveScene()->AddModel(&dragon);
+	/*SceneManager::GetActiveScene()->AddMesh(&monkey2);
+	SceneManager::GetActiveScene()->AddMesh(&monkey3);*/
 
 	
 	//finally run game

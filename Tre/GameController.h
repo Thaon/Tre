@@ -3,7 +3,7 @@
 #include "Common.h"
 
 #include "Shader.h"
-#include "Mesh.h"
+#include "Model.h"
 #include "Texture.h"
 #include "transform.h"
 #include "SceneManager.h"
@@ -21,6 +21,6 @@ public:
 
 private:
 	float counter;
-	Mesh* m1, *m2, *m3;
+	Model* m1, *m2, *m3;
 };
 
