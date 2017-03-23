@@ -78,6 +78,7 @@ void MainGame::drawGame(float delta)
 	{
 		//bind shader
 		model->GetShader()->Bind();
+		model->GetTransform().Update();
 		model->GetShader()->Update(model->GetTransform(), *m_activeCam);
 		
 		//textures are bound in the Mesh's draw function

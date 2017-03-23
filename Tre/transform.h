@@ -11,42 +11,50 @@ public:
 		this->pos = pos;
 		this->rot = rot;
 		this->scale = scale;
+
+		modelMatrix = glm::mat4(1.0f);
+		translationMatrix = glm::mat4(1.0f);
+		rotationMatrix = glm::mat4(1.0f);
+		scaleMatrix = glm::mat4(1.0f);
 	}
 
 	inline glm::mat4 GetModel() const
 	{
-		glm::mat4 scaleMat = glm::scale(scale);
-		glm::mat4 rotX = glm::rotate(rot.x, glm::vec3(1.0, 0.0, 0.0));
-		glm::mat4 rotY = glm::rotate(rot.y, glm::vec3(0.0, 1.0, 0.0));
-		glm::mat4 rotZ = glm::rotate(rot.z, glm::vec3(0.0, 0.0, 1.0));
-		glm::mat4 rotMat = rotX * rotY * rotZ;
-		glm::mat4 posMat = glm::translate(pos);
-
-		return posMat * rotMat * scaleMat;
+		return modelMatrix;
 	}
 
-	/*inline glm::mat4 GetMVP(const Camera& camera) const
+	inline void Update()
 	{
-		glm::mat4 VP = camera.GetViewProjection();
-		glm::mat4 M = GetModel();
+		translationMatrix = glm::translate(pos);
+		scaleMatrix = glm::scale(scale);
 
-		return VP * M;//camera.GetViewProjection() * GetModel();
-	}*/
+		modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
+	}
 
 	inline glm::vec3* GetPos() { return &pos; } //getters
 	inline glm::vec3* GetRot() { return &rot; }
 	inline glm::vec3* GetScale() { return &scale; }
 
 	inline void SetPos(glm::vec3& pos) { this->pos = pos; } // setters
-	inline void SetRot(glm::vec3& rot) { this->rot = rot; }
 	inline void SetScale(glm::vec3& scale) { this->scale = scale; }
+	inline void SetRotation(glm::vec3 change)
+	{
+		rot = change;
+		rotationMatrix = glm::eulerAngleXYZ(rot.x, rot.y, rot.z);
+	}
 
-	inline void Move(glm::vec3& amt) { this->pos += amt; }
-	inline void Rotate(glm::vec3& amt) { this->rot += amt; }
-	inline void Scale(glm::vec3& amt) { this->scale += amt; }
+	inline void Rotate(float amt, glm::vec3& axis)
+	{ 
+		rotationMatrix *= glm::rotate(glm::mat4(), amt, axis);
+	}
 
 protected:
 private:
+	glm::mat4 translationMatrix;
+	glm::mat4 rotationMatrix;
+	glm::mat4 scaleMatrix;
+	glm::mat4 modelMatrix;
+
 	glm::vec3 pos;
 	glm::vec3 rot;
 	glm::vec3 scale;
