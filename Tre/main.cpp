@@ -6,7 +6,7 @@ int main(int argc, char** argv) //argument used to call SDL main
 {
 	//create and configure game
 	MainGame mainGame;
-	int width = 1600;
+	int width = 800;
 	int height = 600;
 	mainGame.InitDisplay(width, height);
 
@@ -25,7 +25,7 @@ int main(int argc, char** argv) //argument used to call SDL main
 	//Texture texture("../res/bricks.jpg"); //load texture
 	//Texture texture1("../res/water.jpg"); //load texture
 
-	dragon.SetShader(&unlitshader);
+	dragon.SetShader(&rimshader);
 
 	/*monkey2.loadModel("../res/monkey3.obj");
 	monkey2.SetShader(&rimshader);

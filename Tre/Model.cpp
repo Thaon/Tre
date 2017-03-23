@@ -1,21 +1,15 @@
 #include "Model.h"
 
 
-Model::~Model()
-{
-}
-
-void Model::Draw()
+void Model::Draw(Shader shader)
 {
 	for (GLuint i = 0; i < this->meshes.size(); i++)
-		this->meshes[i]->draw();
+		meshes[i].Draw(shader);
 }
 
-void Model::SetShader(Shader * shader)
+void Model::SetShader(Shader* shader)
 {
 	m_shader = shader;
-	for (GLuint i = 0; i < this->meshes.size(); i++)
-		meshes[i]->SetShader(m_shader);
 }
 
 void Model::loadModel(std::string path)
@@ -28,12 +22,13 @@ void Model::loadModel(std::string path)
 		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
 		return;
 	}
-	std::cout << "loaded model at: " << path << std::endl;
+	std::cout << "Loaded model: " << path << std::endl;
 
 	this->directory = path.substr(0, path.find_last_of('/'));
 
 	this->processNode(scene->mRootNode, scene);
 }
+
 
 void Model::processNode(aiNode * node, const aiScene * scene)
 {
@@ -41,7 +36,7 @@ void Model::processNode(aiNode * node, const aiScene * scene)
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		meshes.push_back(processMesh(mesh, scene));
+		this->meshes.push_back(this->processMesh(mesh, scene));
 	}
 	// Then do the same for each of its children
 	for (GLuint i = 0; i < node->mNumChildren; i++)
@@ -50,7 +45,7 @@ void Model::processNode(aiNode * node, const aiScene * scene)
 	}
 }
 
-Mesh* Model::processMesh(aiMesh * mesh, const aiScene * scene)
+Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
 {
 	// Data to fill
 	std::vector<Vertex> vertices;
@@ -68,13 +63,10 @@ Mesh* Model::processMesh(aiMesh * mesh, const aiScene * scene)
 		vector.z = mesh->mVertices[i].z;
 		vertex.pos = vector;
 		// Normals
-		if (mesh->mNormals != NULL)
-		{
-			vector.x = mesh->mNormals[i].x;
-			vector.y = mesh->mNormals[i].y;
-			vector.z = mesh->mNormals[i].z;
-			vertex.normal = vector;
-		}
+		vector.x = mesh->mNormals[i].x;
+		vector.y = mesh->mNormals[i].y;
+		vector.z = mesh->mNormals[i].z;
+		vertex.normal = vector;
 		// Texture Coordinates
 		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?
 		{
@@ -101,6 +93,12 @@ Mesh* Model::processMesh(aiMesh * mesh, const aiScene * scene)
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+		// We assume a convention for sampler names in the shaders. Each diffuse texture should be named
+		// as 'texture_diffuseN' where N is a sequential number ranging from 1 to MAX_SAMPLER_NUMBER. 
+		// Same applies to other texture as the following list summarizes:
+		// Diffuse: texture_diffuseN
+		// Specular: texture_specularN
+		// Normal: texture_normalN
 
 		// 1. Diffuse maps
 		std::vector<Texture> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
@@ -111,7 +109,7 @@ Mesh* Model::processMesh(aiMesh * mesh, const aiScene * scene)
 	}
 
 	// Return a mesh object created from the extracted mesh data
-	return new Mesh(vertices, indices, textures);
+	return Mesh(vertices, indices, textures);
 }
 
 std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType type, std::string typeName)
@@ -124,7 +122,7 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType
 		GLboolean skip = false;
 		for (GLuint j = 0; j < textures_loaded.size(); j++)
 		{
-			if (std::strcmp(textures_loaded[j].path.c_str(), str.C_Str()) == 0)
+			if (std::strcmp(textures_loaded[j].path.C_Str(), str.C_Str()) == 0)
 			{
 				textures.push_back(textures_loaded[j]);
 				skip = true;
@@ -134,9 +132,9 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType
 		if (!skip)
 		{   // If texture hasn't been loaded already, load it
 			Texture texture;
-			texture.SetHandler(TextureFromFile(str.C_Str(), this->directory));
+			texture.id = TextureFromFile(str.C_Str(), this->directory);
 			texture.type = typeName;
-			texture.path = str.C_Str();
+			texture.path = str;
 			textures.push_back(texture);
 			this->textures_loaded.push_back(texture);  // Add to loaded textures
 		}

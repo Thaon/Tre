@@ -72,7 +72,7 @@ void MainGame::processInput()
 Transform transform;
 void MainGame::drawGame(float delta)
 {
-	m_gameDisplay->clearDisplay(0.0f, 0.0f, 0.0f, 1.0f);
+	m_gameDisplay->clearDisplay(1.0f, 1.0f, 1.0f, 1.0f);
 
 	for (auto model : SceneManager::GetActiveScene()->GetModels())
 	{
@@ -83,7 +83,7 @@ void MainGame::drawGame(float delta)
 		//textures are bound in the Mesh's draw function
 
 		//draw
-		model->Draw();
+		model->Draw(*model->GetShader());
 	}
 				
 	glEnableClientState(GL_COLOR_ARRAY); 
