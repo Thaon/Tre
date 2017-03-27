@@ -25,6 +25,7 @@ Shader::Shader(const std::string& filename)
 	CheckShaderError(program, GL_VALIDATE_STATUS, true, "Error: Shader program not valid");
 
 	uniforms[TRANSFORM_U] = glGetUniformLocation(program, "transform"); // associate with the location of uniform variable within a program
+	uniforms[VIEWPROJECTION] = glGetUniformLocation(program, "viewProj"); // associate with the location of uniform variable within a program
 	uniforms[CAMPOSITION] = glGetUniformLocation(program, "camPos");
 }
 
@@ -46,11 +47,15 @@ void Shader::Bind()
 
 void Shader::Update(const Transform& transform, const Camera& camera)
 {
+	glm::vec3 cameraPosition = camera.GetPosition();
 	glm::mat4 mvp = camera.GetViewProjection() * transform.GetModel();
-	glm::mat4 camPos = camera.GetViewProjection();
+	glm::mat4 view = camera.GetViewProjection();
+	//glm::mat4 camPos = camera.GetViewProjection();
 
 	glUniformMatrix4fv(uniforms[TRANSFORM_U], 1, GLU_FALSE, &mvp[0][0]);
-	glUniformMatrix4fv(uniforms[CAMPOSITION], 1, GLU_FALSE, &mvp[0][0]);
+	glUniform3fv(uniforms[CAMPOSITION], 1, &cameraPosition[0]);
+	glUniformMatrix4fv(uniforms[VIEWPROJECTION], 1, GLU_FALSE, &view[0][0]);
+
 }
 
 

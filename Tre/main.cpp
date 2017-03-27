@@ -12,7 +12,7 @@ int main(int argc, char** argv) //argument used to call SDL main
 
 	
 	//create monkey object
-	Model dragon("car", "../res/Car/Car.3ds", false);
+	Model dragon("car", "../res/Dragon/Dragon.3DS", false);
 	dragon.AddExternalTexture("../res/Water.jpg");
 	dragon.AddExternalTexture("../res/bricks.jpg");
 	

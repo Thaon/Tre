@@ -21,11 +21,12 @@ public:
 
 protected:
 private:
-	static const unsigned int NUM_SHADERS = 2; // number of shaders
+	static const unsigned int NUM_SHADERS = 3; // number of shaders
 
 	enum
 	{
 		TRANSFORM_U,
+		VIEWPROJECTION,
 		CAMPOSITION,
 
 		NUM_UNIFORMS
