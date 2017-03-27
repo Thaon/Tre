@@ -13,9 +13,9 @@ GameController::~GameController()
 
 void GameController::Start()
 {
-	m1 = SceneManager::GetActiveScene()->GetModel("monkey");
-	m1->GetTransform().SetScale(glm::vec3(.2f, .2f, .2f));
-	m1->GetTransform().SetPos(glm::vec3(0.0, -2.0, 0.0));
+	m1 = SceneManager::GetActiveScene()->GetModel("car");
+	m1->GetTransform().SetScale(glm::vec3(.5f, .5f, .5f));
+	m1->GetTransform().SetPos(glm::vec3(0.0, 0.0, 0.0));
 	m1->GetTransform().SetRotation(glm::vec3(-90, 0, 0));
 
 	/*m2 = SceneManager::GetActiveScene()->GetMesh("monkey2");

@@ -3,8 +3,31 @@
 
 void Model::Draw(Shader shader)
 {
-	for (GLuint i = 0; i < this->meshes.size(); i++)
-		meshes[i].Draw(shader);
+	if (m_useInternalTextures)
+	{
+		for (GLuint i = 0; i < this->meshes.size(); i++)
+			meshes[i].Draw(shader);
+	}
+	else
+	{
+		GLuint diffuseNr = 1;
+		for (GLuint i = 0; i < this->textures_loaded.size(); i++)
+		{
+			glActiveTexture(GL_TEXTURE0 + i); // Activate proper texture unit before binding
+											  // Retrieve texture number (the N in diffuse_textureN)
+			std::stringstream ss;
+			std::string number;
+			ss << diffuseNr++;
+			number = ss.str();
+
+			glUniform1f(glGetUniformLocation(shader.GetProgram(), ("texture_diffuse" + number).c_str()), i);
+			glBindTexture(GL_TEXTURE_2D, this->textures_loaded[i].id);
+		}
+		glActiveTexture(GL_TEXTURE0);
+
+		for (GLuint i = 0; i < this->meshes.size(); i++)
+			meshes[i].OnlyDrawMesh(shader);
+	}
 }
 
 void Model::SetShader(Shader* shader)
@@ -58,15 +81,28 @@ Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
 		Vertex vertex;
 		glm::vec3 vector; // We declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
 						  // Positions
-		vector.x = mesh->mVertices[i].x;
-		vector.y = mesh->mVertices[i].y;
-		vector.z = mesh->mVertices[i].z;
-		vertex.pos = vector;
+		if (mesh->mVertices->Length() > 0)
+		{
+			vector.x = mesh->mVertices[i].x;
+			vector.y = mesh->mVertices[i].y;
+			vector.z = mesh->mVertices[i].z;
+			vertex.pos = vector;
+		}
+		else
+		{
+			std::cout << "could not load vertices!" << std::endl;
+		}
 		// Normals
-		vector.x = mesh->mNormals[i].x;
-		vector.y = mesh->mNormals[i].y;
-		vector.z = mesh->mNormals[i].z;
-		vertex.normal = vector;
+		if (mesh->mNormals->Length() > 0)
+		{
+			vector.x = mesh->mNormals[i].x;
+			vector.y = mesh->mNormals[i].y;
+			vector.z = mesh->mNormals[i].z;
+			vertex.normal = vector;
+		}
+		else
+			std::cout << "could not load normals!" << std::endl;
+
 		// Texture Coordinates
 		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?
 		{
@@ -90,7 +126,7 @@ Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
 			indices.push_back(face.mIndices[j]);
 	}
 	// Process materials
-	if (mesh->mMaterialIndex >= 0)
+	if (m_useInternalTextures && mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 		// We assume a convention for sampler names in the shaders. Each diffuse texture should be named
@@ -131,6 +167,7 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType
 		}
 		if (!skip)
 		{   // If texture hasn't been loaded already, load it
+			std::cout << "found texture: " << str.C_Str() << " of type: " << typeName << std::endl;
 			Texture texture;
 			texture.id = TextureFromFile(str.C_Str(), this->directory);
 			texture.type = typeName;
@@ -168,4 +205,33 @@ GLint Model::TextureFromFile(const char * path, std::string directory)
 	glBindTexture(GL_TEXTURE_2D, 0);
 	SOIL_free_image_data(image);
 	return textureID;
+}
+
+void Model::AddExternalTexture(std::string dir)
+{
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	int width, height;
+	unsigned char* image = SOIL_load_image(dir.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+	if (image != nullptr)
+		std::cout << "loaded: " << dir << std::endl;
+	else
+		std::cout << "could not load: " << dir << std::endl;
+	// Assign texture to ID
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	// Parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	SOIL_free_image_data(image);
+
+	Texture texture;
+	texture.id = textureID;
+	texture.path = dir;
+	this->textures_loaded.push_back(texture);  // Add to loaded textures
 }

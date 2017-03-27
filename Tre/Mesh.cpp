@@ -71,3 +71,10 @@ void Mesh::Draw(Shader shader)
 	glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
+
+void Mesh::OnlyDrawMesh(Shader shader)
+{
+	glBindVertexArray(this->VAO);
+	glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+}
