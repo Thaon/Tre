@@ -6,7 +6,7 @@ attribute vec3 normal;
 
 varying vec2 texCoord0;
 
-uniform mat4 transform;
+uniform mat4 MVP;
 uniform mat4 camPos;
 
 out vec4 v_pos;
@@ -16,7 +16,7 @@ out mat4 cam;
 void main()
 {
 	cam = camPos;
-	gl_Position = transform * vec4(position, 1.0);
+	gl_Position = MVP * vec4(position, 1.0);
 	v_pos = vec4(position, 1.0);
 	v_norm = normal;
 	texCoord0 = texCoord;

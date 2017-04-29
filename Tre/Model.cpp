@@ -11,22 +11,20 @@ void Model::Draw(Shader shader)
 	else
 	{
 		GLuint diffuseNr = 1;
-		for (GLuint i = 0; i < this->textures_loaded.size(); i++)
-		{
-			glActiveTexture(GL_TEXTURE0 + i); // Activate proper texture unit before binding
-											  // Retrieve texture number (the N in diffuse_textureN)
-			std::stringstream ss;
-			std::string number;
-			ss << diffuseNr++;
-			number = ss.str();
-
-			glUniform1f(glGetUniformLocation(shader.GetProgram(), ("texture_diffuse" + number).c_str()), i);
-			glBindTexture(GL_TEXTURE_2D, this->textures_loaded[i].id);
-		}
-		glActiveTexture(GL_TEXTURE0);
-
 		for (GLuint i = 0; i < this->meshes.size(); i++)
+		{
+			for (GLuint j = 0; j < this->textures_loaded.size(); j++)
+			{
+				std::string number = std::to_string(textures_loaded[j].id);
+				glUniform1i(glGetUniformLocation(shader.GetProgram(), ("texture_diffuse" + number).c_str()), j);
+				glActiveTexture(GL_TEXTURE0 + j); // Activate proper texture unit before binding
+												  // Retrieve texture number (the N in diffuse_textureN)
+				glBindTexture(GL_TEXTURE_2D, this->textures_loaded[j].id);
+			}
+
+
 			meshes[i].OnlyDrawMesh(shader);
+		}
 	}
 }
 
@@ -88,23 +86,16 @@ Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
 			vector.z = mesh->mVertices[i].z;
 			vertex.pos = vector;
 		}
-		else
-		{
-			std::cout << "could not load vertices!" << std::endl;
-		}
 		// Normals
-		if (mesh->mNormals->Length() > 0)
+		if (mesh->mNormals !=  nullptr)
 		{
 			vector.x = mesh->mNormals[i].x;
 			vector.y = mesh->mNormals[i].y;
 			vector.z = mesh->mNormals[i].z;
 			vertex.normal = vector;
 		}
-		else
-			std::cout << "could not load normals!" << std::endl;
-
 		// Texture Coordinates
-		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?
+		if (mesh->mTextureCoords != nullptr) // Does the mesh contain texture coordinates?
 		{
 			glm::vec2 vec;
 			// A vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't 
@@ -115,13 +106,17 @@ Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
 		}
 		else
 			vertex.texCoord = glm::vec2(0.0f, 0.0f);
+
 		vertices.push_back(vertex);
 	}
 	// Now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
-	for (GLuint i = 0; i < mesh->mNumFaces; i++)
+	for (GLuint i = 0; i < mesh->mNumFaces; i++) // from: http://stackoverflow.com/questions/31683310/assimp-not-loading-correctly
 	{
 		aiFace face = mesh->mFaces[i];
-		// Retrieve all indices of the face and store them in the indices vector
+		if (face.mNumIndices < 3) {
+			continue;
+		}
+		assert(face.mNumIndices == 3);
 		for (GLuint j = 0; j < face.mNumIndices; j++)
 			indices.push_back(face.mIndices[j]);
 	}
@@ -210,11 +205,12 @@ GLint Model::TextureFromFile(const char * path, std::string directory)
 void Model::AddExternalTexture(std::string dir)
 {
 	GLuint textureID;
+	glActiveTexture(GL_TEXTURE0 + textures_loaded.size() - 1);
 	glGenTextures(1, &textureID);
 	int width, height;
 	unsigned char* image = SOIL_load_image(dir.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
 	if (image != nullptr)
-		std::cout << "loaded: " << dir << std::endl;
+		std::cout << "loaded: " << dir << ", with texture ID: " << textureID << std::endl;
 	else
 		std::cout << "could not load: " << dir << std::endl;
 	// Assign texture to ID
@@ -227,7 +223,7 @@ void Model::AddExternalTexture(std::string dir)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	//glBindTexture(GL_TEXTURE_2D, 0);
 	SOIL_free_image_data(image);
 
 	Texture texture;

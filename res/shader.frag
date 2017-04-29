@@ -2,13 +2,9 @@
 
 varying vec2 texCoord0;
 
-uniform sampler2D texture_diffuse1;
 uniform sampler2D texture_diffuse2;
-uniform sampler2D texture_specular1;
-uniform sampler2D texture_specular2;
-
 
 void main()
 {
-	gl_FragColor = texture2D(texture_diffuse1, texCoord0);
+	gl_FragColor = texture2D(texture_diffuse2, texCoord0);
 }

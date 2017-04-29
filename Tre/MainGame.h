@@ -21,7 +21,7 @@ public:
 private:
 
 	void initSystems();
-	void processInput();
+	void processInput(float delta);
 	void gameLoop();
 	void drawGame(float delta);
 
@@ -31,7 +31,7 @@ private:
 
 	GameController m_controller;
 
-	float oldTime, newTime = 0;
-
+	float oldTime, m_burnAmount, newTime;
+	bool m_burning = false;
 };
 

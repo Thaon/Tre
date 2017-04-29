@@ -8,8 +8,8 @@ in mat4 cam;
 
 varying vec2 texCoord0;
 
-uniform sampler2D texture1;
-uniform sampler2D texture2;
+uniform sampler2D texture_diffuse1;
+uniform sampler2D texture_diffuse2;
  
 void main() {
  
@@ -18,10 +18,10 @@ void main() {
   vec3 v = normalize(-p);                       // eye vector
   float vdn = 1.0 - max(dot(v, n), 0.0);        // the rim contribution#
 
-  vec4 t0 = texture2D(texture2, texCoord0);
-  vec4 t1 = texture2D(texture1, texCoord0);
+  vec4 t0 = texture2D(texture_diffuse1, texCoord0);
+  vec4 t1 = texture2D(texture_diffuse2, texCoord0);
 
   //* vec3(smoothstep(0.0, 0.6, vdn));
  
-  fragcolor = mix(t0, t1, t0.b);
+  fragcolor = mix(t0 * smoothstep(0.0, 0.6, vdn), t1 * smoothstep(0.6, 1.0, vdn), t0.b);
 }
