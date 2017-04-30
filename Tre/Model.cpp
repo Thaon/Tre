@@ -13,13 +13,13 @@ void Model::Draw(Shader shader)
 		GLuint diffuseNr = 1;
 		for (GLuint i = 0; i < this->meshes.size(); i++)
 		{
-			for (GLuint j = 0; j < this->textures_loaded.size(); j++)
+			for (GLuint j = 0; j < this->m_loadedTextures.size(); j++)
 			{
-				std::string number = std::to_string(textures_loaded[j].id);
+				std::string number = std::to_string(m_loadedTextures[j].id);
 				glUniform1i(glGetUniformLocation(shader.GetProgram(), ("texture_diffuse" + number).c_str()), j);
 				glActiveTexture(GL_TEXTURE0 + j); // Activate proper texture unit before binding
 												  // Retrieve texture number (the N in diffuse_textureN)
-				glBindTexture(GL_TEXTURE_2D, this->textures_loaded[j].id);
+				glBindTexture(GL_TEXTURE_2D, this->m_loadedTextures[j].id);
 			}
 
 
@@ -151,11 +151,11 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType
 		aiString str;
 		mat->GetTexture(type, i, &str);
 		GLboolean skip = false;
-		for (GLuint j = 0; j < textures_loaded.size(); j++)
+		for (GLuint j = 0; j < m_loadedTextures.size(); j++)
 		{
-			if (std::strcmp(textures_loaded[j].path.C_Str(), str.C_Str()) == 0)
+			if (std::strcmp(m_loadedTextures[j].path.C_Str(), str.C_Str()) == 0)
 			{
-				textures.push_back(textures_loaded[j]);
+				textures.push_back(m_loadedTextures[j]);
 				skip = true;
 				break;
 			}
@@ -168,7 +168,7 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial * mat, aiTextureType
 			texture.type = typeName;
 			texture.path = str;
 			textures.push_back(texture);
-			this->textures_loaded.push_back(texture);  // Add to loaded textures
+			this->m_loadedTextures.push_back(texture);  // Add to loaded textures
 		}
 	}
 	return textures;
@@ -205,7 +205,7 @@ GLint Model::TextureFromFile(const char * path, std::string directory)
 void Model::AddExternalTexture(std::string dir)
 {
 	GLuint textureID;
-	glActiveTexture(GL_TEXTURE0 + textures_loaded.size() - 1);
+	glActiveTexture(GL_TEXTURE0 + m_loadedTextures.size() - 1);
 	glGenTextures(1, &textureID);
 	int width, height;
 	unsigned char* image = SOIL_load_image(dir.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
@@ -229,5 +229,5 @@ void Model::AddExternalTexture(std::string dir)
 	Texture texture;
 	texture.id = textureID;
 	texture.path = dir;
-	this->textures_loaded.push_back(texture);  // Add to loaded textures
+	this->m_loadedTextures.push_back(texture);  // Add to loaded textures
 }

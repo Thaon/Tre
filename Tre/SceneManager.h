@@ -3,6 +3,10 @@
 #include "Common.h"
 #include "Scene.h"
 
+/***
+	The Scenemanager class offers static functionality to store, access and operate on Scenes
+*/
+
 class SceneManager
 {
 public:

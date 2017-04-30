@@ -16,7 +16,7 @@ Scene* SceneManager::GetScene(std::string sceneName)
 		if (scene->GetName() == sceneName)
 			return scene;
 	}
-	std::cout << "could not find mesh named: " << sceneName << std::endl;
+	std::cout << "could not find scene named: " << sceneName << std::endl;
 	return nullptr;
 }
 

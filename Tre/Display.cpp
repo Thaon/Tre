@@ -54,7 +54,7 @@ void Display::initDisplay()
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);// set up z-buffer
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1); // set up double buffer   
 
-	sdlWindow = SDL_CreateWindow("Game Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, (int)screenWidth, (int)screenHeight, SDL_WINDOW_OPENGL); // create window
+	sdlWindow = SDL_CreateWindow("Tre", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, (int)screenWidth, (int)screenHeight, SDL_WINDOW_OPENGL); // create window
 
 	if (sdlWindow == nullptr)
 	{
@@ -75,8 +75,8 @@ void Display::initDisplay()
 	}
 
 	glEnable(GL_DEPTH_TEST); //enable z-buffering 
-	glDepthFunc(GL_LEQUAL); //nope
-	glEnable(GL_NORMALIZE); //nope, normals still weird
+	glDepthFunc(GL_LEQUAL); //mode to be used by the depth test function
+	glEnable(GL_NORMALIZE);
 	glEnable(GL_CULL_FACE); //dont draw faces that are not pointing at the camera
 
 	glClearColor(0.0f, 1.0f, 1.0f, 1.0f);

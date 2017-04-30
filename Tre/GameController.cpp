@@ -19,11 +19,11 @@ void GameController::Start()
 	m1->GetTransform().SetRotation(glm::vec3(0, 0, 0));
 
 	m2 = SceneManager::GetActiveScene()->GetModel("monkey");
-	m2->GetTransform().SetPos(glm::vec3(-3, 0.0, 0.0));
+	m2->GetTransform().SetPos(glm::vec3(-3, 1.0, 0.0));
 	m2->GetTransform().SetScale(glm::vec3(.8f, .8f, .8f));
 
-	m3 = SceneManager::GetActiveScene()->GetModel("Link");
-	m3->GetTransform().SetPos(glm::vec3(3, 0.0, 0.0));
+	m3 = SceneManager::GetActiveScene()->GetModel("Alien");
+	m3->GetTransform().SetPos(glm::vec3(3, 1.0, 0.0));
 	m3->GetTransform().SetScale(glm::vec3(3, 3, 3));
 }
 

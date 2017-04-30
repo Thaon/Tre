@@ -5,6 +5,9 @@
 #include "Texture.h"
 #include "transform.h"
 
+/***
+	The Vertex class holds information about position, uv coordinates and normals
+*/
 
 struct Vertex
 {
@@ -17,6 +20,11 @@ public:
 	glm::vec2 texCoord;
 	glm::vec3 normal;
 };
+
+/***
+	The Mesh class has all the information required by OpenGl to draw its polygons.
+	It also contains a vector of textures, this particular vector is only used if during the model loading, the Mesh's internal textures are used.
+*/
 
 class Mesh {
 public:

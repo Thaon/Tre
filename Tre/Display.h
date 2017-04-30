@@ -1,6 +1,9 @@
 #pragma once
 #include "Common.h"
 
+/***
+	The Display class first initializes the window, then creates and configures the OpenGl context.
+*/
 
 class Display
 {

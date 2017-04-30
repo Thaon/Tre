@@ -1,5 +1,10 @@
 #pragma once
 
+/***
+	This class is just a common access point to the required libraries.
+	Appropriate Include Guards make sure that compile time is not slowed down by this centralized references point.
+*/
+
 #include <iostream>
 #include <sstream>
 #include <string>

@@ -9,6 +9,7 @@ MainGame::MainGame()
 	m_activeCam = nullptr;
 	m_gameState = GameState::PLAY;
 	m_gameDisplay = nullptr;
+	m_backgroundColour = glm::vec4(0, 0, 0, 0);
 }
 
 MainGame::~MainGame()
@@ -16,10 +17,11 @@ MainGame::~MainGame()
 	delete m_gameDisplay;
 }
 
-void MainGame::InitDisplay(int width, int height)
+void MainGame::InitDisplay(int width, int height, glm::vec4 clearColour)
 {
 	m_gameDisplay = new Display(width, height);
 	m_gameDisplay->initDisplay();
+	m_backgroundColour = clearColour;
 }
 
 void MainGame::run()
@@ -101,7 +103,7 @@ void MainGame::processInput(float delta)
 Transform transform;
 void MainGame::drawGame(float delta)
 {
-	m_gameDisplay->clearDisplay(1.0f, 1.0f, 1.0f, 1.0f);
+	m_gameDisplay->clearDisplay(m_backgroundColour.r, m_backgroundColour.g, m_backgroundColour.b, m_backgroundColour.a);
 
 	for (auto model : SceneManager::GetActiveScene()->GetModels())
 	{

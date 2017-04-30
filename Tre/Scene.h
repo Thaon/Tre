@@ -3,6 +3,14 @@
 #include "Common.h"
 #include "Model.h"
 
+/***
+	The Scene class offers a way to manage models in a structured way.
+	It essentially is just a collection of references to Models that are imported in the game (preferably in the main function).
+	It provides methods to operate on the vector of pointers to models and is usually accessed in the MainGame.cpp to perform operations of models such as:
+	- Pass Transform information to Shaders
+	- Draw the Meshes
+*/
+
 class Scene
 {
 public:

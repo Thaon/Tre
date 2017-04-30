@@ -2,12 +2,16 @@
 
 #include "Common.h"
 
+/***
+	The Camera class provides a rough and minimal way to set and control the projection in the OpenGl application.
+	
+	To be noted that the camera position is passed to Shaders as a Uniform.
+*/
+
 struct Camera
 {
 public:
-	Camera()
-	{
-	}
+	Camera() {}
 
 	void initCamera(const glm::vec3& pos, float fov, float aspect, float nearClip, float farClip)
 	{
@@ -25,34 +29,6 @@ public:
 	inline void SetPosition(glm::vec3 pos) { this->pos = pos; }
 
 	glm::vec3 GetPosition() const { return this->pos; }
-
-	//void MoveForward(float amt)
-	//{
-	//	pos += forward * amt;
-	//}
-
-	//void MoveRight(float amt)
-	//{
-	//	pos += glm::cross(up, forward) * amt;
-	//}
-
-	//void Pitch(float angle)
-	//{
-	//	glm::vec3 right = glm::normalize(glm::cross(up, forward));
-
-	//	forward = glm::vec3(glm::normalize(glm::rotate(angle, right) * glm::vec4(forward, 0.0)));
-	//	up = glm::normalize(glm::cross(forward, right));
-	//}
-
-	//void RotateY(float angle)
-	//{
-	//	static const glm::vec3 UP(0.0f, 1.0f, 0.0f);
-
-	//	glm::mat4 rotation = glm::rotate(angle, UP);
-
-	//	forward = glm::vec3(glm::normalize(rotation * glm::vec4(forward, 0.0)));
-	//	up = glm::vec3(glm::normalize(rotation * glm::vec4(up, 0.0)));
-	//}
 
 protected:
 private:

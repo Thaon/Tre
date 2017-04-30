@@ -10,13 +10,11 @@ in vec2 tex;
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
 	vec2 uv = fragCoord.xy;
-    uv.y *= -1.;
+    uv.y *= -1;
     
     vec3 pixel = vec3(0.0);
     
     float height = texture(texture_diffuse2 ,uv.xy).r;
-    
-  
     
     pixel = texture(texture_diffuse1,uv.xy).rgb;
     

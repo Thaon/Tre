@@ -8,59 +8,37 @@ int main(int argc, char** argv) //argument used to call SDL main
 	MainGame mainGame;
 	int width = 1200;
 	int height = 600;
-	mainGame.InitDisplay(width, height);
+	mainGame.InitDisplay(width, height, glm::vec4(0.7f, 0.7f, 0.7f,1));
 
 	
-	//create monkey object
+	//Load models and textures, if using false on the UseInternalTextures parameter
 	Model nano("nanosuit", "../res/nanosuit/nanosuit.obj", true);
-
 
 	Model monkey("monkey", "../res/monkey3.obj", false);
 	monkey.AddExternalTexture("../res/bricks.jpg");
 	monkey.AddExternalTexture("../res/Water.jpg");
 	
-	Model link("Link", "../res/Hominid/alienhominid.obj", true);
+	Model alien("Alien", "../res/Hominid/alienhominid.obj", true);
 
-
-	//Shader shader("../res/shader"); //unlit shader
-	Shader unlitshader("../res/shader"); //rim shader
-	Shader rimshader("../res/rim"); //rim shader
-	Shader blendshader("../res/blend"); //blended shader
+	//Load in the shader
 	Shader burnshader("../res/burn"); //burn shader
 
-	//Texture texture("../res/bricks.jpg"); //load texture
-	//Texture texture1("../res/water.jpg"); //load texture
-
+	//bind the shader to the models
 	nano.SetShader(&burnshader);
 	monkey.SetShader(&burnshader);
-	link.SetShader(&burnshader);
+	alien.SetShader(&burnshader);
 
-	/*monkey2.loadModel("../res/monkey3.obj");
-	monkey2.SetShader(&rimshader);
-	monkey2.AddTexture(&texture1);
-	monkey2.AddTexture(&texture);
-
-	monkey3.loadModel("../res/monkey3.obj");
-	monkey3.SetShader(&blendshader);
-	monkey3.AddTexture(&texture1);
-	monkey3.AddTexture(&texture);*/
-	
-	//create camera
+	//create camera and set it as the main active one
 	Camera cam;
-	cam.initCamera(glm::vec3(0, 0, -5), 70.0f, float(width / height), 0.01f, 1000.0f);
+	cam.initCamera(glm::vec3(0, 1, -5), 70.0f, float(width / height), 0.01f, 1000.0f);
 	mainGame.SetActiveCamera(&cam);
 
-
-	//create scene and add meshes
+	//create scene and add models
 	SceneManager::CreateScene("Scene1");
 	SceneManager::GetActiveScene()->AddModel(&nano);
 	SceneManager::GetActiveScene()->AddModel(&monkey);
-	SceneManager::GetActiveScene()->AddModel(&link);
+	SceneManager::GetActiveScene()->AddModel(&alien);
 
-	/*SceneManager::GetActiveScene()->AddMesh(&monkey2);
-	SceneManager::GetActiveScene()->AddMesh(&monkey3);*/
-
-	
 	//finally run game
 	mainGame.run();
 

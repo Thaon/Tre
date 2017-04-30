@@ -1,2 +1,14 @@
-﻿  GameController.cpp
+﻿  Shader.cpp
+  Generating Code...
+  Compiling...
+  main.cpp
+  Model.cpp
+  Mesh.cpp
+  MainGame.cpp
+c:\users\gabri\onedrive\documents\github\tre\tre\maingame.cpp(49): warning C4244: '=': conversion from 'Uint64' to 'float', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  SceneManager.cpp
+  Scene.cpp
+  GameController.cpp
   Tre.vcxproj -> C:\Users\gabri\OneDrive\Documents\GitHub\Tre\Debug\Tre.exe

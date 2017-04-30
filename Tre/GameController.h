@@ -9,7 +9,12 @@
 #include "SceneManager.h"
 
 
-///this class will be the only access point to the engine, alongside the main function
+/***
+	this class will be the only access point to the engine to manipulate Models at every frame, alongside the main function, which can be used to set up initial data for them.
+
+	A very rough ooutline of Unity's MonoBehavior was used as an inspiration for the class.
+*/
+
 class GameController
 {
 public:

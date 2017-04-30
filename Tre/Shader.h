@@ -4,6 +4,13 @@
 #include "transform.h"
 #include "Camera.h"
 
+/***
+	The Shader class handles the following:
+	- Loading and compiling of external Shaders
+	- Binding of the Shader to the OpenGl pipeline
+	- Passing game data to the shader (attributes and uniforms)
+*/
+
 class Shader
 {
 public:

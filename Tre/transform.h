@@ -3,6 +3,16 @@
 #include "Common.h"
 #include "camera.h"
 
+/***
+	The Transform class stores information about:
+	-Position
+	-Rotation
+	-Scale
+	for each Model in the scene
+
+	Additionally it provides methods to operate on those variables and a getter for the Model Matrix to be passed to shaders	
+*/
+
 struct Transform
 {
 public:
